@@ -18,6 +18,14 @@ const tokenCache = {
       return null;
     }
   },
+
+  async saveToken(key: string, value: string) {
+    try {
+      return SecureStore.setItemAsync(key, value);
+    } catch (err) {
+      return;
+    }
+  },
 };
 
 export {
@@ -70,6 +78,7 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
+
 
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
